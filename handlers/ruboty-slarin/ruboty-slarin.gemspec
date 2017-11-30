@@ -15,6 +15,4 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler'
   spec.add_dependency 'pry-byebug'
-
-  spec.add_dependency 'slack-ruby-client'
 end

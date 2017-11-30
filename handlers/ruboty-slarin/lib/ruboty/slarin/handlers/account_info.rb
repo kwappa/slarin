@@ -5,12 +5,14 @@ module Ruboty
         on(/account_info(?<emails>.++)/m, name: 'account_info', description: 'search and show account info')
 
         def account_info(message)
-          emails = Ruboty::Slarin.find_emails(message[:emails])
+          client = Ruboty::Slarin::SlackClient.new
+          users  = client.find_users_by_emails(message[:emails])
 
-          if emails.empty?
+          if users.empty?
             message.reply('有効なメールアドレスが見つかりませんでした。')
           else
-            message.reply(%Q[以下のメールアドレスが見つかりました :\n#{emails.join("\n")}])
+            result = users.map { |(email, user)| "#{email} : #{client.format(user)}" }
+            message.reply(%Q[以下のユーザーが見つかりました :\n#{result.join("\n")}])
           end
         end
       end
