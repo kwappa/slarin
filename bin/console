@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'ruboty'
+require_relative '../handlers/ruboty-slarin/lib/ruboty/slarin'
+
+require 'dotenv'
+Dotenv.load('./.env')
+
+require 'pry'
+Pry.start
