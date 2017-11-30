@@ -1,3 +1,6 @@
+.env
 .bundle/
 vendor/bundle
 logs/*log*
+
+/handlers/**/vendor/bundle
