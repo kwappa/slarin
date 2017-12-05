@@ -1,6 +1,12 @@
 module Ruboty
   module Slarin
     class SlackClient
+      def send_account_info(message)
+        user = message.original[:user]
+        body = format(user)
+        client.chat_postMessage(channel: user['id'], text: body, as_user: true)
+      end
+
       def format(user)
         return '該当なし' if user.nil?
 

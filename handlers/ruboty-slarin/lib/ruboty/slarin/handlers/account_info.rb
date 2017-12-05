@@ -3,6 +3,7 @@ module Ruboty
     module Handlers
       class AccountInfo < Ruboty::Handlers::Base
         on(/account_info(?<emails>.++)/m, name: 'account_info', description: 'search and show account info')
+        on(/my_account/, name: 'my_account',description: 'show your account info')
 
         def account_info(message)
           client = Ruboty::Slarin::SlackClient.new
@@ -14,6 +15,11 @@ module Ruboty
             result = users.map { |(email, user)| "#{email} : #{client.format(user)}" }
             message.reply(%Q[以下のユーザーが見つかりました :\n#{result.join("\n")}])
           end
+        end
+
+        def my_account(message)
+          client = Ruboty::Slarin::SlackClient.new
+          client.send_account_info(message)
         end
       end
     end
